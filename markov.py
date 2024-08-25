@@ -1,18 +1,21 @@
-import copy
+# TODO check if transition matrix is stochastic ERROR
+# TODO check if initial state's probability add up to 1 ERROR
+# TODO check if n = lenght of matrix and initial
+# TODO make comments more mathematically accurate
+
 
 """ 
     The bellow class Markov_chain offers the utility functions 
-    to make calculations with Markov's Chains 
+    for solving basic problems with Markov Chains.
 """
+import copy
+
 class Markov_chain:
     def __init__(self, matrix: int, num_states: int):
         self.matrix = matrix
         self.num_states = num_states
 
     # Calculates the n-step transition probablity matrix of the Markov's chain.
-        # From the Kolmogorov-Chapman equation it's shown that the 
-        # n-step transition probablity matrix is obtained by elevating the
-        # one-step transition probability matrix to the power of n
     def n_step_matrix(self, n: int):
         if n == 1:
             return self.matrix
@@ -48,13 +51,15 @@ class Markov_chain:
 
         return prob_vector
     
-    # Given an array containing the trajectory of the chain 
+    # Given an array containing the trajectory of the chain, 
+    # it returns the probability of it following that trajectory
     def trajectory(self, initial: int, path: int, n: int):
         p0 = initial[path[0]-1]
         for i in range(1, n):
             p0 *= self.matrix[path[i-1]-1][path[i]-1]
         return p0
 
+# testing
 if __name__ == "__main__":
 
     matrix = [[0.1, 0.5, 0.4], 
