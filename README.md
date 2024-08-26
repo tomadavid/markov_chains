@@ -1,5 +1,5 @@
 # markov_chains
-Python class with utility functions for solving basic problems with Markov Chains.
+Python class with utility functions for solving basic problems with discrete-time Markov Chains (DTMC).
 
 The constructor receives a stochastic matrix that respresents the chain's transition model.
 
