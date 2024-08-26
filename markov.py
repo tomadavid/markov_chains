@@ -65,7 +65,7 @@ class Markov_chain:
 
         return prob_vector
     
-    
+
     # Given an array containing a certain state trajectory with shape
     #   [t0, t1, t2, ...]
     # where tn is the state of the chain when time is equal to n (t = n)
@@ -94,26 +94,29 @@ def stochastic_check(matrix: int):
         row_sum = 0
         for elem in row:
             row_sum += elem
-        if row_sum != 1:
+        if round(row_sum) != 1:
             raise ValueError('invalid value: Matrix is not stochastic')
 
 # check if vector's entries add up to 1
 def check_initial_vector(vec: int):
-    if not stochastic_check(vec):
+    sum = 0
+    for elem in vec:
+        sum += elem
+    if round(sum) != 1:
         raise ValueError('invalid value: initial vector\'s probabilities do not add up to 1')
     
 # running example
 if __name__ == "__main__":
 
-    matrix = [[0.1, 0.5, 0.4], 
-              [0.6, 0.2, 0.2],
-              [0.3, 0.4, 0.3]]
+    matrix = [[0.5, 0.5, 0.0], 
+              [0.0, 0.5, 0.5],
+              [0.5, 0.0, 0.5]]
     
     initial = [0.7, 0.2, 0.1]
 
     path = [1, 3, 3, 2]
 
-    markov_chain = Markov_chain(matrix, 3)
+    markov_chain = Markov_chain(matrix)
     
     ex_1 = markov_chain.transition_prob(1, 3, 2)
     ex_2 = markov_chain.transition_prob(2, 3, 3)
